@@ -10,10 +10,11 @@ from sys import maxint
 WORDS = ["WHO", "WHAT", "HOW MUCH", "HOW MANY", "HOW OLD"]
 
 
-def handle(self, text, mic):
-    app_id = self.profile['keys']['WOLFRAMALPHA']
+def handle(text, mic, profile):
+    app_id = profile['keys']['WOLFRAMALPHA']
     client = wolframalpha.Client(app_id)
 
+    mic.say("Wolfram Alpha know it...")
     query = client.query(text)
     if len(query.pods) > 0:
         texts = ""
@@ -28,5 +29,5 @@ def handle(self, text, mic):
         mic.say("Sorry, Could you be more specific?.")
 
 
-def is_valid(self, text):
-    return any(p.lower() in text.lower() for p in self.get_phrases())
+def isValid(text):
+    return any(p.lower() in text.lower() for p in WORDS)
