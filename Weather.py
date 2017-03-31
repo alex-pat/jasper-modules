@@ -128,14 +128,7 @@ def handle(text, mic, profile):
 
     owm = pyowm.OWM(api_key)
 
-    if re.search(r'\b(CURRENT|TODAYS|TODAY)\b',text,re.IGNORECASE):
-        cw = owm.weather_at_place(city_name+","+country)
-        loc = cw.get_location().get_name()
-        weather = cw.get_weather()
-        weather_report = getWeatherReport(weather,loc,temp_unit,report='current')
-        mic.say(weather_report)
-
-    elif re.search(r'\b(TOMORROWS|TOMORROW)\b',text,re.IGNORECASE):
+    if re.search(r'\b(TOMORROWS|TOMORROW)\b',text,re.IGNORECASE):
         forecast = owm.daily_forecast(city_name)
         fore = forecast.get_forecast()
         loc = fore.get_location().get_name()
@@ -150,6 +143,13 @@ def handle(text, mic, profile):
         loc = fore.get_location().get_name()
         weather_report = getWeeklyWeatherReport(forecast,loc,temp_unit,report='weekly')
         mic.say(weather_report)
+    else: # re.search(r'\b(CURRENT|TODAYS|TODAY)\b',text,re.IGNORECASE):
+        cw = owm.weather_at_place(city_name+","+country)
+        loc = cw.get_location().get_name()
+        weather = cw.get_weather()
+        weather_report = getWeatherReport(weather,loc,temp_unit,report='current')
+        mic.say(weather_report)
+
 
 def isValid(text):
     return any(word in text.upper() for word in WORDS)

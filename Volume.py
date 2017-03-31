@@ -21,8 +21,8 @@ def handle(text, mic, profile):
         action = '+'
     elif "down" in text:
         action = '-'
-    system("amixer -D plughw:1,0 set PCM 30%" + action)
-    mic.say("Ok, %", text)
+    system("amixer -c 1 set PCM 1000" + action)
+    mic.say("Ok, " + text)
 
 
 def isValid(text):
