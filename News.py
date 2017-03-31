@@ -6,7 +6,7 @@ from semantic.numbers import NumberService
 
 WORDS = ["NEWS", "YES", "NO", "FIRST", "SECOND", "THIRD"]
 
-PRIORITY = 3
+PRIORITY = 1
 
 URL = 'http://news.ycombinator.com'
 
